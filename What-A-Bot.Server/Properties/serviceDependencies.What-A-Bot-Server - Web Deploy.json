@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "appConfig1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.AppConfiguration/configurationStores/what-a-bot-appconfiguration",
+      "type": "appConfig.azure",
+      "connectionId": "AppConfig",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
