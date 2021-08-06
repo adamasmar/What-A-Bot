@@ -37,26 +37,31 @@ namespace What_A_Bot.Worker
             }
         }
 
-        private async Task ClientMessageReceived(SocketMessage message)
+        private static async Task ClientMessageReceived(SocketMessage message)
         {
-            var command = string.Empty;
-            var lengthOfCommand = -1;
-            var emptyChar = ' ';
+            const char emptyChar = ' ';
 
             if (!message.Content.StartsWith("!") || message.Author.IsBot)
             {
                 await Task.CompletedTask;
             }
 
-            lengthOfCommand = message.Content.Contains(emptyChar)
+            var lengthOfCommand = message.Content.Contains(emptyChar)
                 ? message.Content.IndexOf(emptyChar)
                 : message.Content.Length;
 
-            command = message.Content.Substring(1, lengthOfCommand - 1);
+            var command = message.Content.Substring(1, lengthOfCommand - 1);
+
+            await LogAsync(new LogMessage(LogSeverity.Info, "Code",
+                $"Message with command of {message.Content} by {message.Author} received at {message.Channel}."));
 
             if (command.Equals("HelloBot", StringComparison.CurrentCultureIgnoreCase))
             {
-                await message.Channel.SendMessageAsync($"Hello {message.Author}. I am What-A-Bot. I only exist right now as a worker process on a Web Server, however this will change. Plans will include processing and cleansing of commands and logic to be run through Azure functions so commands may be added via JavaScript and C#!. I will reside here: ")
+                var text =
+                    $"Hello {message.Author}. I am What-A-Bot.{Environment.NewLine}{Environment.NewLine}I only exist right now as a worker process on a Web Service, however this will change. Plans will include processing and cleansing of commands and logic to be run through Azure functions so commands may be added via JavaScript and C#!.{Environment.NewLine}{Environment.NewLine}I will reside here: https://github.com/adamasmar/What-A-Bot.";
+                await message.Channel.SendMessageAsync(text);
+                await LogAsync(new LogMessage(LogSeverity.Info, "Code",
+                    $"Message sent to {message.Channel}. Content = {text}"));
             }
         }
 
