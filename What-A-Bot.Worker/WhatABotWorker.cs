@@ -13,7 +13,7 @@ namespace What_A_Bot.Worker
     {
         private static ILogger<WhatABotWorker> _logger;
         private readonly IConfiguration _configuration;
-        private DiscordSocketClient _client;
+        private static DiscordSocketClient _client;
 
         public WhatABotWorker(ILogger<WhatABotWorker> logger, IConfiguration configuration)
         {
@@ -62,7 +62,7 @@ namespace What_A_Bot.Worker
                 await message.Channel.SendMessageAsync(text);
                 await LogAsync(new LogMessage(LogSeverity.Info, "Code",
                     $"Message sent to {message.Channel}. Content = {text}"));
-            }//
+            }
         }
 
         private static async Task LogAsync(LogMessage logMessage)
