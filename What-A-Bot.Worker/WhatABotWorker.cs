@@ -62,7 +62,7 @@ namespace What_A_Bot.Worker
                 await message.Channel.SendMessageAsync(text);
                 await LogAsync(new LogMessage(LogSeverity.Info, "Code",
                     $"Message sent to {message.Channel}. Content = {text}"));
-            }
+            }//
         }
 
         private static async Task LogAsync(LogMessage logMessage)
