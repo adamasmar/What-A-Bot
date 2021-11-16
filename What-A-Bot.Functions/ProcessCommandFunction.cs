@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -10,20 +9,21 @@ using Newtonsoft.Json;
 
 namespace What_A_Bot.Functions
 {
-    public static class Function1
+    public static class ProcessCommandFunction
     {
-        [FunctionName("Function1")]
+        [FunctionName("ProcessCommand")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Function,  "post", Route = null)] HttpRequest httpRequest,
+            ILogger logger)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            string name = req.Query["name"];
+            string name = httpRequest.Query["name"];
 
-            var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var requestBody = await new StreamReader(httpRequest.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name ??= data?.name;
+
+            logger.LogInformation(requestBody);
 
             var responseMessage = string.IsNullOrEmpty(name)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."

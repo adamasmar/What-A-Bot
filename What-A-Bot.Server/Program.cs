@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using Azure.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using What_A_Bot.Server.Services;
 using What_A_Bot.Worker;
 
 namespace What_A_Bot.Server
@@ -67,7 +66,6 @@ namespace What_A_Bot.Server
                 {
                     services.AddHostedService<WhatABotWorker>();
                     services.AddControllersWithViews();
-
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
