@@ -31,7 +31,7 @@ namespace What_A_Bot.Server
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
 
             if (env.IsDevelopment())
             {
