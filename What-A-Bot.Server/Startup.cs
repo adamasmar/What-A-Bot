@@ -31,12 +31,7 @@ namespace What_A_Bot.Server
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/.well-known")),
-                RequestPath = new PathString("/.well-known"),
-                ServeUnknownFileTypes = true // serve extensionless file
-            });
+            //app.UseStaticFiles();
 
             if (env.IsDevelopment())
             {
