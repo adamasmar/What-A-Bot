@@ -6,9 +6,9 @@
     <UserSecretsId>c226ddec-88c4-4168-af61-b3bb8826b323</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="wwwroot\.well-known\jwks.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="wwwroot\*" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.3.0" />
